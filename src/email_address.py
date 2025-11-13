@@ -1,0 +1,30 @@
+class EmailAddress:
+    """Класс для хранения и проверки корректности email-адреса."""
+
+    def __init__(self, address: str):
+        normalized = self.normalize_address(address)
+        if not self._check_correct_email(normalized):
+            raise ValueError(f"Invalid email address: {address}")
+        self._address = normalized
+
+    @property
+    def address(self) -> str:
+        return self._address
+
+    @property
+    def masked(self) -> str:
+        """Первые 2 символа + *** + домен"""
+        name, domain = self._address.split("@")
+        return f"{name[:2]}***@{domain}"
+
+    def normalize_address(self, value: str) -> str:
+        """Нормализует email — убирает пробелы и делает нижний регистр"""
+        return value.strip().lower()
+
+    def _check_correct_email(self, value: str) -> bool:
+        """Проверяет наличие '@' и корректное окончание"""
+        if "@" not in value:
+            return False
+        if not (value.endswith(".com") or value.endswith(".ru") or value.endswith(".net")):
+            return False
+        return True
