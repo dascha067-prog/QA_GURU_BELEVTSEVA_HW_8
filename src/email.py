@@ -48,6 +48,8 @@ class Email:
     def prepare(self) -> "Email":
         """Готовлю письмо к отправке"""
         self.clean_data()
+        self.add_short_body()  # ← ДОБАВЛЯЕМ ЭТО
+
         if not self.sender or not self.recipients or not self.is_valid_fields():
             self.status = Status.INVALID
         else:

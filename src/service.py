@@ -6,11 +6,12 @@ from src.status import Status
 
 class EmailService:
     """Сервис отправки писем."""
+
     def __init__(self, email: Email):
         self.email = email
 
-    def add_send_date(self) -> str:
-        """Возвращаю текущую дату в формате YYYY-MM-DD"""
+    def get_send_date(self) -> str:
+        """Возвращаю текущую дату отправки"""
         return datetime.now().strftime("%Y-%m-%d")
 
     def send_email(self) -> List[Email]:
@@ -28,7 +29,10 @@ class EmailService:
                 recipients=[recipient],
                 status=self.email.status,
             )
-            sent.date = self.add_send_date()
+            sent.short_body = self.email.short_body
+
+            sent.date = self.get_send_date()
+
             if self.email.status == Status.READY:
                 sent.status = Status.SENT
             else:

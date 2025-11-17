@@ -1,5 +1,6 @@
 from enum import StrEnum
 
+
 class Status(StrEnum):
     """Статусы письма в процессе подготовки и отправки."""
 

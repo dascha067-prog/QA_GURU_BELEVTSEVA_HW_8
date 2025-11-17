@@ -476,7 +476,6 @@ class TestEmailSystem:
         email.add_short_body(5)
         assert email.short_body is None
 
-
     @pytest.mark.parametrize("subject, body, expected", [
         ("Hello", "World", Status.READY),
         ("", "World", Status.INVALID),
