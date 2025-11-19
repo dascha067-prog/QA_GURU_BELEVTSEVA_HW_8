@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass
 from typing import Optional, Union, List
 from src.utils import clean_text
 from src.email_address import EmailAddress

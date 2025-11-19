@@ -10,10 +10,6 @@ class EmailService:
     def __init__(self, email: Email):
         self.email = email
 
-    def get_send_date(self) -> str:
-        """Возвращаю текущую дату отправки"""
-        return datetime.now().strftime("%Y-%m-%d")
-
     def send_email(self) -> List[Email]:
         """Отправляю письма каждому получателю"""
         results = []
@@ -31,7 +27,7 @@ class EmailService:
             )
             sent.short_body = self.email.short_body
 
-            sent.date = self.get_send_date()
+            sent.date = datetime.now().strftime("%Y-%m-%d")
 
             if self.email.status == Status.READY:
                 sent.status = Status.SENT
